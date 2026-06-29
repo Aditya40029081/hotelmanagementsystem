@@ -40,7 +40,7 @@ public class Roomserviceimpl implements Roomservice {
         existingroom.setRoomnumber(room.getRoomnumber());
         existingroom.setRoomtype(room.getRoomtype());
         existingroom.setPricepernight(room.getPricepernight());
-        existingroom.setAvailable(room.isAvailable());
+        existingroom.setAvailable(room.getAvailable());
 
         return roomrepository.save(existingroom);
     }
