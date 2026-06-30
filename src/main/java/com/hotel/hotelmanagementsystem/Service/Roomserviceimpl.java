@@ -1,9 +1,10 @@
 package com.hotel.hotelmanagementsystem.Service;
 
 import com.hotel.hotelmanagementsystem.Entity.Room;
+import com.hotel.hotelmanagementsystem.Exception.Globalexceptionhandler;
 import com.hotel.hotelmanagementsystem.Repository.Roomrepository;
 import org.springframework.stereotype.Service;
-
+import com.hotel.hotelmanagementsystem.Exception.RoomNotFoundException;
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class Roomserviceimpl implements Roomservice {
 
     @Override
     public Room getRoombyid(Long id) {
-        return roomrepository.findById(id).orElse(null);
+        return roomrepository.findById(id).orElseThrow(()->new RoomNotFoundException("room not found"));
     }
 
     @Override
@@ -40,8 +41,13 @@ public class Roomserviceimpl implements Roomservice {
         existingroom.setRoomnumber(room.getRoomnumber());
         existingroom.setRoomtype(room.getRoomtype());
         existingroom.setPricepernight(room.getPricepernight());
-        existingroom.setAvailable(room.getAvailable());
+        existingroom.setAvailable(room.isAvailable());
 
         return roomrepository.save(existingroom);
+    }
+
+    @Override
+    public List<Room> getavailablerooms() {
+        return roomrepository.findByAvailableTrue();
     }
 }

@@ -38,4 +38,8 @@ public class Roomcontroller {
     public Room updateroom(@PathVariable Long id,@RequestBody Room room){
         return roomservice.updateroom(id,room);
     }
+    @GetMapping("/available")
+    public List<Room> getavailablerooms(){
+        return roomservice.getavailablerooms();
+    }
 }

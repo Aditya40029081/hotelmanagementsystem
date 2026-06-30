@@ -22,5 +22,6 @@ public class Room {
 
     private Double pricepernight;
 
-    private Boolean available;
+    private boolean available;
+
 }

@@ -2,6 +2,7 @@ package com.hotel.hotelmanagementsystem.Service;
 
 
 import com.hotel.hotelmanagementsystem.Entity.Customer;
+import com.hotel.hotelmanagementsystem.Exception.CustomerNotFoundException;
 import com.hotel.hotelmanagementsystem.Repository.Customerrepository;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class Customerserviceimpl implements Customerservice{
 
     @Override
     public Customer getcustomerbyid(Long id) {
-        return customerrepository.findById(id).orElse(null);
+        return customerrepository.findById(id).orElseThrow(()-> new CustomerNotFoundException("customer not found"));
     }
 
     @Override
