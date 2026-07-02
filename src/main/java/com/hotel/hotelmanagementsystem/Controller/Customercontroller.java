@@ -1,12 +1,15 @@
 package com.hotel.hotelmanagementsystem.Controller;
 
 
+import com.hotel.hotelmanagementsystem.Dto.Customerrequestdto;
 import com.hotel.hotelmanagementsystem.Entity.Customer;
 import com.hotel.hotelmanagementsystem.Service.Customerservice;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Valid
 @RestController
 @RequestMapping("/api/customers")
 public class Customercontroller {
@@ -18,8 +21,8 @@ public class Customercontroller {
     }
 
     @PostMapping
-    public Customer addcustomer(@RequestBody Customer customer){
-        return customerservice.addcustomer(customer);
+    public Customer addcustomer(@Valid @RequestBody Customerrequestdto customerrequestdto){
+        return customerservice.addcustomer(customerrequestdto);
     }
 
     @GetMapping
@@ -33,8 +36,8 @@ public class Customercontroller {
     }
 
     @PutMapping("/{id}")
-    public Customer updatecustomer(@PathVariable Long id,@RequestBody Customer customer){
-        return customerservice.updatecustomer(id,customer);
+    public Customer updatecustomer(@PathVariable Long id, @Valid @RequestBody Customerrequestdto customerrequestdto){
+        return customerservice.updatecustomer(id,customerrequestdto);
     }
 
     @DeleteMapping("/{id}")

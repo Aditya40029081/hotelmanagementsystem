@@ -1,8 +1,10 @@
 package com.hotel.hotelmanagementsystem.Controller;
 
 
+import com.hotel.hotelmanagementsystem.Dto.Bookingrequstdto;
 import com.hotel.hotelmanagementsystem.Entity.Booking;
 import com.hotel.hotelmanagementsystem.Service.Bookingservice;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Book;
@@ -19,8 +21,8 @@ public class Bookingcontroller {
     }
 
     @PostMapping
-    public Booking addbooking(@RequestBody Booking booking){
-        return bookingservice.addbooking(booking);
+    public Booking addbooking(@Valid  @RequestBody Bookingrequstdto bookingrequestdto){
+        return bookingservice.addbooking(bookingrequestdto);
     }
 
     @GetMapping
@@ -36,5 +38,10 @@ public class Bookingcontroller {
     @DeleteMapping("{id}")
     public void deletebooking(@PathVariable Long id){
         bookingservice.deletebooking(id);
+        
+    }
+
+    @PutMapping("/{id}")
+    public Booking updatebooking(@PathVariable Long id,@Valid @RequestBody Bookingrequstdto bookingrequstdto){ return bookingservice.updatebooking(id,bookingrequstdto);
     }
 }

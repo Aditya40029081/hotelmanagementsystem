@@ -1,6 +1,7 @@
 package com.hotel.hotelmanagementsystem.Service;
 
 
+import com.hotel.hotelmanagementsystem.Dto.Customerrequestdto;
 import com.hotel.hotelmanagementsystem.Entity.Customer;
 import com.hotel.hotelmanagementsystem.Exception.CustomerNotFoundException;
 import com.hotel.hotelmanagementsystem.Repository.Customerrepository;
@@ -19,7 +20,15 @@ public class Customerserviceimpl implements Customerservice{
 
 
     @Override
-    public Customer addcustomer(Customer customer) {
+    public Customer addcustomer(Customerrequestdto customerrequestdto) {
+
+        Customer customer = new Customer();
+
+        customer.setName(customerrequestdto.getName());
+        customer.setEmail(customerrequestdto.getEmail());
+        customer.setPhone(customerrequestdto.getPhone());
+        customer.setAddress(customerrequestdto.getAddress());
+
         return customerrepository.save(customer);
     }
 
@@ -34,12 +43,12 @@ public class Customerserviceimpl implements Customerservice{
     }
 
     @Override
-    public Customer updatecustomer(Long id,Customer customer) {
+    public Customer updatecustomer(Long id,Customerrequestdto customerrequestdto) {
         Customer existingcustomer=customerrepository.findById(id).orElseThrow(() -> new RuntimeException("customer not found"));
-        existingcustomer.setName(customer.getName());
-        existingcustomer.setEmail(customer.getEmail());
-        existingcustomer.setPhone(customer.getPhone());
-        existingcustomer.setAddress(customer.getAddress());
+        existingcustomer.setName(customerrequestdto.getName());
+        existingcustomer.setEmail(customerrequestdto.getEmail());
+        existingcustomer.setPhone(customerrequestdto.getPhone());
+        existingcustomer.setAddress(customerrequestdto.getAddress());
 
         return customerrepository.save(existingcustomer);
 

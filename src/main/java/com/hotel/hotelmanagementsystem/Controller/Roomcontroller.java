@@ -1,13 +1,16 @@
 package com.hotel.hotelmanagementsystem.Controller;
 
 
+import com.hotel.hotelmanagementsystem.Dto.Roomrequestdto;
 import com.hotel.hotelmanagementsystem.Entity.Room;
 import com.hotel.hotelmanagementsystem.Service.Roomservice;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Valid
 @RequestMapping("/api/rooms")
 
 public class Roomcontroller {
@@ -17,8 +20,8 @@ public class Roomcontroller {
         this.roomservice = roomservice;
     }
     @PostMapping
-    public Room addroom(@RequestBody Room room){
-        return roomservice.addRoom(room);
+    public Room addroom(@Valid @RequestBody Roomrequestdto roomrequestdto){
+        return roomservice.addRoom(roomrequestdto);
     }
     @GetMapping
     public List<Room> getallrooms(){
@@ -35,8 +38,8 @@ public class Roomcontroller {
     }
 
     @PutMapping("/{id}")
-    public Room updateroom(@PathVariable Long id,@RequestBody Room room){
-        return roomservice.updateroom(id,room);
+    public Room updateroom(@PathVariable Long id,@Valid @RequestBody Roomrequestdto roomrequestdto){
+        return roomservice.updateroom(id,roomrequestdto);
     }
     @GetMapping("/available")
     public List<Room> getavailablerooms(){

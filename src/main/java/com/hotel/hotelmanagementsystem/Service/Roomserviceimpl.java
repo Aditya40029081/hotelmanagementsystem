@@ -1,8 +1,10 @@
 package com.hotel.hotelmanagementsystem.Service;
 
+import com.hotel.hotelmanagementsystem.Dto.Roomrequestdto;
 import com.hotel.hotelmanagementsystem.Entity.Room;
 import com.hotel.hotelmanagementsystem.Exception.Globalexceptionhandler;
 import com.hotel.hotelmanagementsystem.Repository.Roomrepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hotel.hotelmanagementsystem.Exception.RoomNotFoundException;
 import java.util.List;
@@ -17,7 +19,12 @@ public class Roomserviceimpl implements Roomservice {
     }
 
     @Override
-    public Room addRoom(Room room) {
+    public Room addRoom(Roomrequestdto roomrequestdto) {
+        Room room=new Room();
+        room.setRoomnumber(roomrequestdto.getRoomnumber());
+        room.setRoomtype(roomrequestdto.getRoomtype());
+        room.setPricepernight(roomrequestdto.getPricepernight());
+        room.setAvailable(roomrequestdto.getAvailable());
         return roomrepository.save(room);
     }
 
@@ -36,12 +43,12 @@ public class Roomserviceimpl implements Roomservice {
         roomrepository.deleteById(id);
     }
     @Override
-    public Room updateroom(Long id,Room room) {
+    public Room updateroom(Long id, Roomrequestdto roomrequestdto) {
         Room existingroom = roomrepository.findById(id).orElseThrow(() -> new RuntimeException("room not found"));
-        existingroom.setRoomnumber(room.getRoomnumber());
-        existingroom.setRoomtype(room.getRoomtype());
-        existingroom.setPricepernight(room.getPricepernight());
-        existingroom.setAvailable(room.isAvailable());
+        existingroom.setRoomnumber(roomrequestdto.getRoomnumber());
+        existingroom.setRoomtype(roomrequestdto.getRoomtype());
+        existingroom.setPricepernight(roomrequestdto.getPricepernight());
+        existingroom.setAvailable(roomrequestdto.getAvailable());
 
         return roomrepository.save(existingroom);
     }

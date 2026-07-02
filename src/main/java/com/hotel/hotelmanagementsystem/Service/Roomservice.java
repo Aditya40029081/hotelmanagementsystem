@@ -1,11 +1,12 @@
 package com.hotel.hotelmanagementsystem.Service;
 
+import com.hotel.hotelmanagementsystem.Dto.Roomrequestdto;
 import com.hotel.hotelmanagementsystem.Entity.Room;
 
 import java.util.List;
 
 public interface Roomservice {
-    Room addRoom(Room room);
+    Room addRoom(Roomrequestdto roomrequestdto);
 
     List<Room> getAllRooms();
 
@@ -13,7 +14,7 @@ public interface Roomservice {
 
     void deleteroom(Long id);
 
-    Room updateroom(Long id,Room room);
+    Room updateroom(Long id, Roomrequestdto roomrequestdto);
 
     List<Room> getavailablerooms();
 }
